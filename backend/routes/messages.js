@@ -2,7 +2,14 @@
 const express = require('express');
 const router = express.Router();
 const Message = require('../models/Message');
-
+router.get('/messages', async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ timestamp: 1 });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 // GET /api/conversations
 // grouped by wa_id, with last message + unread count
 router.get('/conversations', async (req, res) => {
