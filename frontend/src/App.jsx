@@ -11,13 +11,13 @@ export default function App() {
 
   // Stable function reference to avoid re-creation on every render
   const fetchConversations = useCallback(async () => {
-    const res = await fetch(`${API}/api/conversations`);
-    const data = await res.json();
-    setConversations(data);
-    if (data[0] && !activeWa) {
-      setActiveWa(data[0].wa_id);
-    }
-  }, [activeWa]); // Removed API from dependencies
+  const res = await fetch(`${API}/api/conversations`);
+  const data = await res.json();
+  setConversations(data);
+  if (data[0] && !activeWa) {
+    setActiveWa(data[0].wa_id);
+  }
+}, [activeWa]); // Removed API from deps
 
   // Load conversations on mount
   useEffect(() => {
